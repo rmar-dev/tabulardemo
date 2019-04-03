@@ -1,0 +1,52 @@
+>> Date query: Year custom column expression
+==================================================
+"CY" & Number.ToText(Date.Year([Date]))
+
+
+>> Date query: Quarter custom column expression
+==================================================
+[Year] & " Q" & Number.ToText(Date.QuarterOfYear([Date]))
+
+
+>> Date query: Month custom column expression [1]
+==================================================
+Number.ToText(Date.Year([Date])) & " " & Date.ToText([Date], "MMM")
+
+
+>> Date query: Month custom column expression [2]
+==================================================
+Number.ToText(Date.Year([Date])) & " " & 
+(
+	if Date.Month([Date])      =  1 then "Jan"
+	else if Date.Month([Date]) =  2 then "Feb"
+	else if Date.Month([Date]) =  3 then "Mar"
+	else if Date.Month([Date]) =  4 then "Apr"
+	else if Date.Month([Date]) =  5 then "May"
+	else if Date.Month([Date]) =  6 then "Jun"
+	else if Date.Month([Date]) =  7 then "Jul"
+	else if Date.Month([Date]) =  8 then "Aug"
+	else if Date.Month([Date]) =  9 then "Sep"
+	else if Date.Month([Date]) = 10 then "Oct"
+	else if Date.Month([Date]) = 11 then "Nov"
+	else "Dec"
+)
+
+
+>> Sales query: Profit custom column expression
+==================================================
+[Sales] - [Cost]
+
+
+>> Date table: Month calculated column expression
+==================================================
+MonthKey = (YEAR([Date]) * 100) + MONTH([Date])
+
+
+>> Sales table: Profitability measure expression
+==================================================
+Profitability = DIVIDE(SUM(Sales[Profit]), SUM(Sales[Sales]))
+
+
+>> Report server address
+==================================================
+http://SQLSERVER2017:8080/reports

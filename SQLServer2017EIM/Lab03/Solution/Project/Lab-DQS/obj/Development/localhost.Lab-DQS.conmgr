@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="localhost Lab-DQS"
+  DTS:DTSID="{A51884AE-36A1-402D-A468-760576A649DA}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+  p1:Salt="PH4hY+aB7oM="
+  p1:IV="k5126QzXoATDmJC41h4dSg=="
+  p1:Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" xmlns:p1="www.microsoft.com/SqlServer/SSIS">U2azTFR44a9p9kir1f0gEpCQd+0DuLM3VDPItM5rNzc987HF5wqUVL6OcSdIvU2oPTiyiTcmCuB8SvLHRU1C7aCfvgRFAZRU0MuV75zxIvKI081/dL8jjOGdvbZ0oSXrTo92md8srYZAzG816nPZH3KP90Y0ezBulH0UEdDLgPh19HYa9e+VojvNpvVt5JqROaSctEFFjn0Ya5ut1rpLfv/iEVK7BrLPgg5A2xWIXVl4eK2BKYHSyAMHqycGOq0UVM1zyXYaznrBAGzPMzPJsmdxbkuMDP5HW9s/O60qb0KSF9PiQrr97NW/D42K/s0VAecNC7r662d6xAH7gcEYIUo2lTJ+ZVLiqYMiBZ6Fsd73nJhBs2OdNC5qR5eS58uuxsaXG1qOOWVLy45AZ1X32/aM2KHpuCoPb6aWzs7dFCbc7E5rZjGno84Lvyp5kfXhkBdmOqeFtNe2rYmEfvszmgbBd1DLjcaIuYX06Q2ByV2ahsANXdGAgI3zTymi+jZggG0O/RoPfhi75XNCgHmaX9ck/xt0swoov020ogQPUU89ULhnSwQFFsfEum7rjB9qAMKa8JjdeB4PCX+LNvW0SN5fEcItwpOJHQ40xCgcX79SWw1vl7kRSebsB/fsnYtIw8FT0aZs74SQzOSkJpO51hVul8EFRmEOJTtrTDLt2EU9mAZVaFir3f5H6gThjHocxnkZVMTYvBt85VmEWtRptB/sFib1ExrWP80sybCju6wcQSqtROUphJxG8vkoBHtK</DTS:ConnectionManager>

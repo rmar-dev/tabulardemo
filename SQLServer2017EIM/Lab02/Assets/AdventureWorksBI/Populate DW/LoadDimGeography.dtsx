@@ -1,0 +1,2292 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/9/2016"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQLSERVER2016BI"
+  DTS:CreatorName="SQLSERVER2016BI\Administrator"
+  DTS:DTSID="{C148207E-FAE7-4FD0-8038-328A100E7BBF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3006.16"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadDimGeography"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{7F319787-5F1D-435E-B783-363FDB8A77AA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load DimGeography"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F2A69D6C-95AC-4C04-B356-FC85EECA11A3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load DimGeography"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load DimGeography\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input].Columns[City_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="City_Name"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[City_Name]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input].Columns[StateProvince_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="StateProvince_Name"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[StateProvince_Name]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input].Columns[CountryRegion_Code]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="CountryRegion_Code"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Code]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input].Columns[CountryRegion_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="CountryRegion_Name"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Name]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="30"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_City]"
+                      name="DW_City"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[City_Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_StateProvinceName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_StateProvinceName]"
+                      name="DW_StateProvinceName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[StateProvince_Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_CountryRegionCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_CountryRegionCode]"
+                      name="DW_CountryRegionCode"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Code]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_EnglishCountryRegionName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_EnglishCountryRegionName]"
+                      name="DW_EnglishCountryRegionName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimGeography\Insert Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimGeography]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimGeography\Insert Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  connectionManagerRefId="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_City]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="DW_City"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_City]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_StateProvinceCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="DW_StateProvinceCode"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceCode]"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[DW_StateProvinceCode]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_StateProvinceName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_StateProvinceName"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceName]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_StateProvinceName]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_CountryRegionCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="DW_CountryRegionCode"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[CountryRegionCode]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_CountryRegionCode]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_EnglishCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_EnglishCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[EnglishCountryRegionName]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_EnglishCountryRegionName]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_SpanishCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_SpanishCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[SpanishCountryRegionName]"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_SpanishCountryRegionName]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_FrenchCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_FrenchCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[FrenchCountryRegionName]"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_FrenchCountryRegionName]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_PostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="DW_PostalCode"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[PostalCode]"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_PostalCode]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_SalesTerritoryKey]"
+                      cachedDataType="i4"
+                      cachedName="DW_SalesTerritoryKey"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritoryKey]"
+                      lineageId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Match Output].Columns[DW_SalesTerritoryKey]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].Columns[DW_IpAddressLocator]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="DW_IpAddressLocator"
+                      externalMetadataColumnId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[IpAddressLocator]"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_IpAddressLocator]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[GeographyKey]"
+                      dataType="i4"
+                      name="GeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="30"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="StateProvinceCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceName]"
+                      dataType="wstr"
+                      length="50"
+                      name="StateProvinceName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[CountryRegionCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="CountryRegionCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[EnglishCountryRegionName]"
+                      dataType="wstr"
+                      length="50"
+                      name="EnglishCountryRegionName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[SpanishCountryRegionName]"
+                      dataType="wstr"
+                      length="50"
+                      name="SpanishCountryRegionName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[FrenchCountryRegionName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FrenchCountryRegionName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[PostalCode]"
+                      dataType="wstr"
+                      length="15"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritoryKey]"
+                      dataType="i4"
+                      name="SalesTerritoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[IpAddressLocator]"
+                      dataType="wstr"
+                      length="15"
+                      name="IpAddressLocator" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\Insert Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimGeography\Lookup DW DimSalesTerritory"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup DW DimSalesTerritory"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	[SalesTerritoryRegion]
+	,[SalesTerritoryKey]
+
+FROM
+	[dbo].[DimSalesTerritory];</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+	[SalesTerritoryRegion]
+	,[SalesTerritoryKey]
+
+FROM
+	[dbo].[DimSalesTerritory];) [refTable]
+where [refTable].[SalesTerritoryRegion] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="SalesTerritoryRegion" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SalesTerritoryKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[SalesTerritoryRegion]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Connections[OleDbConnection]"
+                  connectionManagerID="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  connectionManagerRefId="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Inputs[Lookup Input].Columns[SalesTerritoryRegion]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="SalesTerritoryRegion"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[SalesTerritoryRegion]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">SalesTerritoryRegion</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Match Output].Columns[DW_SalesTerritoryKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Match Output].Columns[DW_SalesTerritoryKey]"
+                      name="DW_SalesTerritoryKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">SalesTerritoryKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimGeography\Lookup MDS CountryRegion"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup MDS CountryRegion"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	[Code]
+	,[Name]
+	,[SpanishCountryRegionName]
+	,[FrenchCountryRegionName]
+
+FROM
+	[mdm].[Geography_CountryRegion];</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+	[Code]
+	,[Name]
+	,[SpanishCountryRegionName]
+	,[FrenchCountryRegionName]
+
+FROM
+	[mdm].[Geography_CountryRegion];) [refTable]
+where [refTable].[Code] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Code" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Name" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SpanishCountryRegionName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FrenchCountryRegionName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[CountryRegionCode_Code]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimGeography\Lookup MDS CountryRegion.Connections[OleDbConnection]"
+                  connectionManagerID="{72979BA7-3D2A-409D-8F8A-BCBD8A4439F7}:invalid"
+                  connectionManagerRefId="{72979BA7-3D2A-409D-8F8A-BCBD8A4439F7}:invalid"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimGeography\Lookup MDS CountryRegion.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Lookup MDS CountryRegion.Inputs[Lookup Input].Columns[CountryRegionCode_Code]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="CountryRegionCode_Code"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[CountryRegionCode_Code]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Code</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup MDS CountryRegion.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="250"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Code]"
+                      name="CountryRegion_Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Code</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="250"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegion_Name]"
+                      name="CountryRegion_Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Name</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_SpanishCountryRegionName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_SpanishCountryRegionName]"
+                      name="DW_SpanishCountryRegionName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">SpanishCountryRegionName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_FrenchCountryRegionName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_FrenchCountryRegionName]"
+                      name="DW_FrenchCountryRegionName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FrenchCountryRegionName</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup MDS CountryRegion.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup MDS CountryRegion.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimGeography\Lookup MDS StateProvince"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup MDS StateProvince"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	[Code]
+	,[Name]
+	,[StateProvinceCode]
+	,[CountryRegionCode_Code]
+	,[SalesTerritoryRegion_Code]
+
+FROM
+	[mdm].[Geography_StateProvince];</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+	[Code]
+	,[Name]
+	,[StateProvinceCode]
+	,[CountryRegionCode_Code]
+	,[SalesTerritoryRegion_Code]
+
+FROM
+	[mdm].[Geography_StateProvince];) [refTable]
+where [refTable].[Code] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Code" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Name" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StateProvinceCode" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CountryRegionCode_Code" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SalesTerritoryRegion_Code" dataType="DT_WSTR" length="250" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[StateProvince_Code]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimGeography\Lookup MDS StateProvince.Connections[OleDbConnection]"
+                  connectionManagerID="{72979BA7-3D2A-409D-8F8A-BCBD8A4439F7}:invalid"
+                  connectionManagerRefId="{72979BA7-3D2A-409D-8F8A-BCBD8A4439F7}:invalid"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimGeography\Lookup MDS StateProvince.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Lookup MDS StateProvince.Inputs[Lookup Input].Columns[StateProvince_Code]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="StateProvince_Code"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[StateProvince_Code]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Code</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup MDS StateProvince.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[StateProvince_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="250"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[StateProvince_Name]"
+                      name="StateProvince_Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Name</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[DW_StateProvinceCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="3"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[DW_StateProvinceCode]"
+                      name="DW_StateProvinceCode"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StateProvinceCode</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[CountryRegionCode_Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="250"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[CountryRegionCode_Code]"
+                      name="CountryRegionCode_Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CountryRegionCode_Code</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[SalesTerritoryRegion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="250"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[SalesTerritoryRegion]"
+                      name="SalesTerritoryRegion"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">SalesTerritoryRegion_Code</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup MDS StateProvince.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load DimGeography\Lookup MDS StateProvince.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimGeography\MDS City"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="MDS City"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[mdm].[Geography_City]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimGeography\MDS City.Connections[OleDbConnection]"
+                  connectionManagerID="{72979BA7-3D2A-409D-8F8A-BCBD8A4439F7}:invalid"
+                  connectionManagerRefId="{72979BA7-3D2A-409D-8F8A-BCBD8A4439F7}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[City_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      length="250"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[City_Name]"
+                      name="City_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_PostalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[PostalCode]"
+                      length="15"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_PostalCode]"
+                      name="DW_PostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[StateProvince_Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[StateProvince_Code]"
+                      length="250"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[StateProvince_Code]"
+                      name="StateProvince_Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_IpAddressLocator]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[IpAddressLocator]"
+                      length="15"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_IpAddressLocator]"
+                      name="DW_IpAddressLocator"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[VersionName]"
+                      dataType="wstr"
+                      length="50"
+                      name="VersionName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[VersionNumber]"
+                      dataType="i4"
+                      name="VersionNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[VersionFlag]"
+                      dataType="wstr"
+                      length="50"
+                      name="VersionFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="250"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      dataType="wstr"
+                      length="250"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[ChangeTrackingMask]"
+                      dataType="i4"
+                      name="ChangeTrackingMask" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[StateProvince_Code]"
+                      dataType="wstr"
+                      length="250"
+                      name="StateProvince_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[StateProvince_Name]"
+                      dataType="wstr"
+                      length="250"
+                      name="StateProvince_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[StateProvince_ID]"
+                      dataType="i4"
+                      name="StateProvince_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[PostalCode]"
+                      dataType="wstr"
+                      length="15"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[EnterDateTime]"
+                      dataType="dbTimeStamp2"
+                      name="EnterDateTime"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[EnterUserName]"
+                      dataType="wstr"
+                      length="100"
+                      name="EnterUserName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[EnterVersionNumber]"
+                      dataType="i4"
+                      name="EnterVersionNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[LastChgDateTime]"
+                      dataType="dbTimeStamp2"
+                      name="LastChgDateTime"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[LastChgUserName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastChgUserName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[LastChgVersionNumber]"
+                      dataType="i4"
+                      name="LastChgVersionNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[ValidationStatus]"
+                      dataType="wstr"
+                      length="250"
+                      name="ValidationStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[IpAddressLocator]"
+                      dataType="wstr"
+                      length="15"
+                      name="IpAddressLocator" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="i4"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[MUID]"
+                      dataType="guid"
+                      name="MUID" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].ExternalColumns[Version_ID]"
+                      dataType="i4"
+                      name="Version_ID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[PostalCode]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[PostalCode]"
+                      name="PostalCode" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[StateProvince_Code]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[StateProvince_Code]"
+                      name="StateProvince_Code" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[IpAddressLocator]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Error Output].Columns[IpAddressLocator]"
+                      name="IpAddressLocator" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimGeography\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE [dbo].[DimGeography] SET [EnglishCountryRegionName] = ?,[FrenchCountryRegionName] = ?,[IpAddressLocator] = ?,[SalesTerritoryKey] = ?,[SpanishCountryRegionName] = ?,[StateProvinceName] = ? WHERE [City] = ? AND [CountryRegionCode] = ? AND [PostalCode] = ? AND [StateProvinceCode] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimGeography\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  connectionManagerRefId="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_City]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="DW_City"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_City]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_CountryRegionCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="DW_CountryRegionCode"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_CountryRegionCode]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_EnglishCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_EnglishCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_EnglishCountryRegionName]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_FrenchCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_FrenchCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_FrenchCountryRegionName]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_IpAddressLocator]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="DW_IpAddressLocator"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_IpAddressLocator]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_PostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="DW_PostalCode"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_8]"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_PostalCode]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_SalesTerritoryKey]"
+                      cachedDataType="i4"
+                      cachedName="DW_SalesTerritoryKey"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Match Output].Columns[DW_SalesTerritoryKey]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_SpanishCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_SpanishCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_SpanishCountryRegionName]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_StateProvinceCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="DW_StateProvinceCode"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_9]"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[DW_StateProvinceCode]" />
+                    <inputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].Columns[DW_StateProvinceName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_StateProvinceName"
+                      externalMetadataColumnId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_StateProvinceName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="15"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="i4"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="wstr"
+                      length="30"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      dataType="wstr"
+                      length="3"
+                      name="Param_7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_8]"
+                      dataType="wstr"
+                      length="15"
+                      name="Param_8">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_9]"
+                      dataType="wstr"
+                      length="3"
+                      name="Param_9">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimGeography\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimGeography\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimGeography\Slowly Changing Dimension"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
+              name="Slowly Changing Dimension"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SELECT statement used to create a schema rowset."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [City], [CountryRegionCode], [EnglishCountryRegionName], [FrenchCountryRegionName], [IpAddressLocator], [PostalCode], [SalesTerritoryKey], [SpanishCountryRegionName], [StateProvinceCode], [StateProvinceName] FROM [dbo].[DimGeography]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the column name for the inferred member."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether inferred member updates are detected."
+                  name="EnableInferredMember">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies that all rows in the input are new or the transformation detects the change type."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Connections[LookupConnection]"
+                  connectionManagerID="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  connectionManagerRefId="{E93F6DD7-2085-48B4-BE17-489783B057CC}:invalid"
+                  description="Defines the connection to use for lookups in the dimension table"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+                  name="Slowly Changing Dimension Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_City]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="DW_City"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[City]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_City]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_CountryRegionCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="DW_CountryRegionCode"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[CountryRegionCode]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_CountryRegionCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_EnglishCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_EnglishCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[EnglishCountryRegionName]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_EnglishCountryRegionName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_FrenchCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_FrenchCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[FrenchCountryRegionName]"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_FrenchCountryRegionName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_IpAddressLocator]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="DW_IpAddressLocator"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[IpAddressLocator]"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_IpAddressLocator]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_PostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="DW_PostalCode"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[PostalCode]"
+                      lineageId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output].Columns[DW_PostalCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_SalesTerritoryKey]"
+                      cachedDataType="i4"
+                      cachedName="DW_SalesTerritoryKey"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[SalesTerritoryKey]"
+                      lineageId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Match Output].Columns[DW_SalesTerritoryKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_SpanishCountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_SpanishCountryRegionName"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[SpanishCountryRegionName]"
+                      lineageId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output].Columns[DW_SpanishCountryRegionName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_StateProvinceCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="DW_StateProvinceCode"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[StateProvinceCode]"
+                      lineageId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output].Columns[DW_StateProvinceCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[DW_StateProvinceName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DW_StateProvinceName"
+                      externalMetadataColumnId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[StateProvinceName]"
+                      lineageId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output].Columns[DW_StateProvinceName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="30"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[CountryRegionCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="CountryRegionCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[EnglishCountryRegionName]"
+                      dataType="wstr"
+                      length="50"
+                      name="EnglishCountryRegionName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[FrenchCountryRegionName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FrenchCountryRegionName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[IpAddressLocator]"
+                      dataType="wstr"
+                      length="15"
+                      name="IpAddressLocator" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[PostalCode]"
+                      dataType="wstr"
+                      length="15"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[SalesTerritoryKey]"
+                      dataType="i4"
+                      name="SalesTerritoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[SpanishCountryRegionName]"
+                      dataType="wstr"
+                      length="50"
+                      name="SpanishCountryRegionName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[StateProvinceCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="StateProvinceCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[StateProvinceName]"
+                      dataType="wstr"
+                      length="50"
+                      name="StateProvinceName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[Unchanged Output]"
+                  description="Unchanged rows"
+                  exclusionGroup="1"
+                  name="Unchanged Output"
+                  synchronousInputId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[New Output]"
+                  description="New rows"
+                  exclusionGroup="1"
+                  name="New Output"
+                  synchronousInputId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[Fixed Attribute Output]"
+                  description="Rows with changes in columns tagged FixedAttribute"
+                  exclusionGroup="1"
+                  name="Fixed Attribute Output"
+                  synchronousInputId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]"
+                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
+                  exclusionGroup="1"
+                  name="Changing Attribute Updates Output"
+                  synchronousInputId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[Historical Attribute Inserts Output]"
+                  description="HistoricalAttribute (Type 2) changes result in these new rows"
+                  exclusionGroup="2"
+                  name="Historical Attribute Inserts Output"
+                  synchronousInputId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[Inferred Member Updates Output]"
+                  description="Information to update unpopulated initial dimension row"
+                  exclusionGroup="1"
+                  name="Inferred Member Updates Output"
+                  synchronousInputId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load DimGeography.Paths[Changing Attribute Updates Output]"
+              endId="Package\Load DimGeography\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Changing Attribute Updates Output"
+              startId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]" />
+            <path
+              refId="Package\Load DimGeography.Paths[Data Conversion Output]"
+              endId="Package\Load DimGeography\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+              name="Data Conversion Output"
+              startId="Package\Load DimGeography\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load DimGeography.Paths[Lookup Match Output]"
+              endId="Package\Load DimGeography\Data Conversion.Inputs[Data Conversion Input]"
+              name="Lookup Match Output"
+              startId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load DimGeography.Paths[Lookup Match Output1]"
+              endId="Package\Load DimGeography\Lookup MDS CountryRegion.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load DimGeography\Lookup MDS StateProvince.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load DimGeography.Paths[Lookup Match Output2]"
+              endId="Package\Load DimGeography\Lookup DW DimSalesTerritory.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load DimGeography\Lookup MDS CountryRegion.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load DimGeography.Paths[New Output]"
+              endId="Package\Load DimGeography\Insert Destination.Inputs[OLE DB Destination Input]"
+              name="New Output"
+              startId="Package\Load DimGeography\Slowly Changing Dimension.Outputs[New Output]" />
+            <path
+              refId="Package\Load DimGeography.Paths[OLE DB Source Output]"
+              endId="Package\Load DimGeography\Lookup MDS StateProvince.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load DimGeography\MDS City.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Load DimGeography"
+          TopLeft="64.5,42.5" />
+        <AnnotationLayout
+          Text="This package is responsible for loading the geography data from the Master Data Services subscription views."
+          ParentId="Package"
+          Size="535,62"
+          Id="7845c3f9-cf69-4eb7-bd8c-a55f525df5b4"
+          TopLeft="257,33">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="15.75"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load DimGeography">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Load DimGeography\Lookup MDS StateProvince"
+          TopLeft="178.58333333333,153.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Load DimGeography\Data Conversion"
+          TopLeft="178.58333333333,459.5" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load DimGeography\OLE DB Command"
+          TopLeft="353,664.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Load DimGeography\Lookup DW DimSalesTerritory"
+          TopLeft="178.58333333333,357.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Load DimGeography\Slowly Changing Dimension"
+          TopLeft="178.58333333333,561.5" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load DimGeography\Insert Destination"
+          TopLeft="46.5,662.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Load DimGeography\MDS City"
+          TopLeft="178.58333333333,51.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Load DimGeography\Lookup MDS CountryRegion"
+          TopLeft="178.58333333333,255.5" />
+        <EdgeLayout
+          Id="Package\Load DimGeography.Paths[OLE DB Source Output]"
+          TopLeft="288.58333333333,93.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimGeography.Paths[New Output]"
+          TopLeft="253.25,603.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-125.25,59"
+              Start="0,0"
+              End="-125.25,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.85559566787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.85559566787"
+                    Point2="0,23.85559566787"
+                    Point3="-4,23.85559566787" />
+                  <mssgle:LineSegment
+                    End="-121.25,23.85559566787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-121.25,23.85559566787"
+                    Point2="-125.25,23.85559566787"
+                    Point3="-125.25,27.85559566787" />
+                  <mssgle:LineSegment
+                    End="-125.25,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-98.5850390625,28.85559566787,71.920078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimGeography.Paths[Lookup Match Output2]"
+          TopLeft="288.58333333333,297.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimGeography.Paths[Lookup Match Output1]"
+          TopLeft="288.58333333333,195.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimGeography.Paths[Lookup Match Output]"
+          TopLeft="288.58333333333,399.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimGeography.Paths[Data Conversion Output]"
+          TopLeft="288.58333333333,501.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimGeography.Paths[Changing Attribute Updates Output]"
+          TopLeft="323.91666666667,603.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="112.083333333333,61"
+              Start="0,0"
+              End="112.083333333333,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.6642599277978" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.6642599277978"
+                    Point2="0,24.6642599277978"
+                    Point3="4,24.6642599277978" />
+                  <mssgle:LineSegment
+                    End="108.083333333333,24.6642599277978" />
+                  <mssgle:CubicBezierSegment
+                    Point1="108.083333333333,24.6642599277978"
+                    Point2="112.083333333333,24.6642599277978"
+                    Point3="112.083333333333,28.6642599277978" />
+                  <mssgle:LineSegment
+                    End="112.083333333333,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-31.1533723958335,29.6642599277978,174.390078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Retrieve the city records using the mdm.Geography_City subscription view."
+          ParentId="Package\Load DimGeography"
+          Size="401,62"
+          Id="e96afd7e-765a-4c60-b671-174a5a7d9c83"
+          TopLeft="432,43">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="15.75"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Lookup the StateProvince attribute values using the mdm.Geography_StateProvince subscription view."
+          ParentId="Package\Load DimGeography"
+          Size="556,62"
+          Id="48de03f0-ee67-485a-81c2-a06de95b737e"
+          TopLeft="432,146">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="15.75"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Lookup the CountryRegion attribute values using the mdm.Geography_CountryRegion subscription view."
+          ParentId="Package\Load DimGeography"
+          Size="522,62"
+          Id="3d725472-6dba-49bb-a3c6-e7c87e552c37"
+          TopLeft="432,251.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="15.75"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Lookup the SalesTerritoryKey (surrogate key) from the dbo.DimSalesTerritory table."
+          ParentId="Package\Load DimGeography"
+          Size="470,62"
+          Id="29e2b82f-18b8-4bf7-bc91-e037b58584bd"
+          TopLeft="432,350.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="15.75"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Convert the retrieved Code and Name attribute columns to their correct size. Master Data Services fixes these two mandatory columns at a length of 250."
+          ParentId="Package\Load DimGeography"
+          Size="528,81"
+          Id="df35d1e0-9de7-4b1d-8278-1013e3ec2bd7"
+          TopLeft="432,449.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="15.75"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="The Slowly Changing Dimension transformation has been configured to perform a match on Country, State, City and PostalCode. Any non-matches will be considered to be new records. Any matches that have a different SalesTerritoryKeyID or IpAddressLocator will be updated."
+          ParentId="Package\Load DimGeography"
+          Size="391,138"
+          Id="d3b35b5c-9320-426d-8c95-60c51e05ab9e"
+          TopLeft="559,558.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="15.75"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimGeography\Lookup MDS StateProvince">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimGeography\MDS City">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,6 @@
+D:\aasLab\AdventureWorksBI\SalesAnalysis\bin\Model.asdatabase
+D:\aasLab\AdventureWorksBI\SalesAnalysis\bin\Model.deploymenttargets
+D:\aasLab\AdventureWorksBI\SalesAnalysis\bin\Model.deploymentoptions
+D:\aasLab\AdventureWorksBI\SalesAnalysis\obj\Development\Model.asdatabase
+D:\aasLab\AdventureWorksBI\SalesAnalysis\obj\Development\Model.deploymentoptions
+D:\aasLab\AdventureWorksBI\SalesAnalysis\obj\Development\Model.deploymenttargets

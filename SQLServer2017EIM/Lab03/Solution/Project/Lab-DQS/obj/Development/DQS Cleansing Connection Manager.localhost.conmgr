@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DQS Cleansing Connection Manager.localhost"
+  DTS:DTSID="{BA9C817D-8227-4206-8F69-D7F5BBD92C28}"
+  DTS:CreationName="DQS"
+  p1:Salt="v/++cKim6dE="
+  p1:IV="En87u1bWOxl1FZymHKtV9Q=="
+  p1:Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" xmlns:p1="www.microsoft.com/SqlServer/SSIS">zLlzN9sK1LtCqSqXI7G2zCxfi64EsM+mA3sIKnF1dT8hBl9215z3jW7TvyEHrnaBEc0nOldKuDJ+qnxXa0X1niCSGsIpfeMdh4tzG3oJszwgRTglVDrk7oHLY28RrzH9UEY+wVwGAXb1GHJz0R9bJ0Ys7GyBC52bFzHuZSYq4UWPRWqhmqoZvW5bxue1PkYT4TMqmy/wlitG7DPRwuoSHTL/EqSSzbwHShJZ5ohBPik1ATDSo6ILPt4CvwThQof4iZBrJ+euKGjRGVPkT9nOFhfDX3m3ixCVi3TUZj2Kh+sA/4I/tU/FwBI0exp17HekXYcjgpNzjpTrg014NG2IEOwn/ywXnbXp6bh64AeJjHhAiNoB721R9/OihXuePTQj8nGc/6SDEHXqC14Qy6l4HxdLKlIJQLowHjGShl8xz+yffU4MBvqsapuXmL+n64XfPOEmr1LyyGz4klFkJmZ5EWnaumx4KkP6zM9k0vBs7TtW/mqdiLiyc2Dj7+2BuJah</DTS:ConnectionManager>

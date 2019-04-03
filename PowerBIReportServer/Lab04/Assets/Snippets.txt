@@ -1,0 +1,14 @@
+>> AdventureWorksDW2016 connection string
+==================================================
+Data Source=SQLSERVER2017;Initial Catalog=AdventureWorksDW2016;
+
+
+>> Matrix cell (0, 0) expression
+==================================================
+=Parameters!Year.Label
+
+
+>> Matrix cell (0, 1) expression
+==================================================
+="Q" & Fields!CalendarQuarter.Value
+

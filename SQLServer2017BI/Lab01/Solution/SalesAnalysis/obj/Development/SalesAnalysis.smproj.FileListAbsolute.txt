@@ -1,0 +1,13 @@
+D:\Lab03\Lab03\Starter\SalesAnalysis\bin\Model.asdatabase
+D:\Lab03\Lab03\Starter\SalesAnalysis\bin\Model.deploymenttargets
+D:\Lab03\Lab03\Starter\SalesAnalysis\bin\Model.deploymentoptions
+D:\Lab03\Lab03\Starter\SalesAnalysis\obj\Development\Model.asdatabase
+D:\Lab03\Lab03\Starter\SalesAnalysis\obj\Development\Model.deploymentoptions
+D:\Lab03\Lab03\Starter\SalesAnalysis\obj\Development\Model.deploymenttargets
+D:\SQLServer2017BI\Lab01\Starter\SalesAnalysis\bin\Model.asdatabase
+D:\SQLServer2017BI\Lab01\Starter\SalesAnalysis\bin\Model.deploymenttargets
+D:\SQLServer2017BI\Lab01\Starter\SalesAnalysis\bin\Model.deploymentoptions
+D:\SQLServer2017BI\Lab01\Starter\SalesAnalysis\obj\Development\SalesAnalysis.smproj.CoreCompileInputs.cache
+D:\SQLServer2017BI\Lab01\Starter\SalesAnalysis\obj\Development\Model.asdatabase
+D:\SQLServer2017BI\Lab01\Starter\SalesAnalysis\obj\Development\Model.deploymentoptions
+D:\SQLServer2017BI\Lab01\Starter\SalesAnalysis\obj\Development\Model.deploymenttargets

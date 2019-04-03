@@ -1,0 +1,366 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/15/2011 2:26:36 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="CTP3IMAGE"
+  DTS:CreatorName="BETA0\Administrator"
+  DTS:DTSID="{956B33A2-C5D5-4CC4-8345-A053B34CABCD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Master"
+  DTS:PackageType="5"
+  DTS:VersionBuild="28"
+  DTS:VersionGUID="{CCE9F275-4C24-4E34-B14E-37ECBDA7A8E8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{0D88EF00-8F57-42C1-87F7-463BA5586AB1}"
+      DTS:ObjectName="ETLDate"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">1/1/2007</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7958BDAD-0CFE-4054-B1D8-F1F135B5F534}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ETLID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute Dimension Load Packages"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2619E349-26CE-421B-8B24-62D0CFE9379C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Dimension Load Packages">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Execute Dimension Load Packages\LoadDimGeography"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{CAD0AE80-D584-4DDF-B8DB-237C3A15B87C}"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="LoadDimGeography"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>LoadDimGeography.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentETLID</ParameterName>
+                <BindedVariableOrParameterName>User::ETLID</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Fact Load Packages"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{ADFC119F-A27F-4F87-B5AD-D5FC483113FE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Fact Load Packages">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Execute Fact Load Packages\LoadFactSalesQuota"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
+          DTS:Description="Execute Package Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{A16E3421-65A9-4FA4-A62C-076E2A39763E}"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="LoadFactSalesQuota"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>LoadFactSalesQuota.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentETLID</ParameterName>
+                <BindedVariableOrParameterName>User::ETLID</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Package Execution End"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{31A372C6-F77E-4BFA-8D9C-7C6E30DF6470}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Package Execution End"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server &quot;Denali&quot; CTP3; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E93F6DD7-2085-48B4-BE17-489783B057CC}"
+          SQLTask:SqlStatementSource="EXEC etl.uspLogPackageExecution_End ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ETLID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Package Execution Start"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E3461926-7F7A-4FC5-B26F-75101E9528C0}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Package Execution Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server &quot;Denali&quot; CTP3; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E93F6DD7-2085-48B4-BE17-489783B057CC}"
+          SQLTask:SqlStatementSource="EXEC etl.uspLogPackageExecution_Master_Start ?, ?, ?, ?, ? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::ETLDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::MachineName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::UserName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::ETLID"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0825B762-F918-4D1B-87DE-68956BDD21BF}"
+      DTS:From="Package\Log Package Execution Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute Dimension Load Packages" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FC9F60DE-0DF8-4CA4-87C6-932900C15EB7}"
+      DTS:From="Package\Execute Dimension Load Packages"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute Fact Load Packages" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{34FBBF59-4B1E-4F15-826B-198CB13AFC17}"
+      DTS:From="Package\Execute Fact Load Packages"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Log Package Execution End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Execute Dimension Load Packages\LoadDimGeography"
+          TopLeft="22.166666666667,19.166666666667" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="239,83"
+          Size="239,126"
+          Id="Package\Execute Dimension Load Packages"
+          TopLeft="252.833333333333,126.833333333333" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Execute Fact Load Packages\LoadFactSalesQuota"
+          TopLeft="22.166666666667,8.16666666666703" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="240,79"
+          Size="240,122"
+          Id="Package\Execute Fact Load Packages"
+          TopLeft="250.833333333333,283.833333333333" />
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Log Package Execution End"
+          TopLeft="253.763333333333,588.833333333333" />
+        <NodeLayout
+          Size="235,42"
+          Id="Package\Log Package Execution Start"
+          TopLeft="258.416666666667,21.8333333333333" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="374.083333333334,63.8333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62.9999999999997"
+              Start="0,0"
+              End="0,55.4999999999997">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.4999999999997" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="371.705833333333,253">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.833333333333"
+              Start="0,0"
+              End="0,23.333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="371.548333333333,405.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,183"
+              Start="0,0"
+              End="0,175.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,175.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="This partially developed package is responsible for executing the data warehouse load packages in correct sequence.&#xA;&#xA;The package design includes an ETLDate parameter that is required at execution time, and the date value is used to determine the source data to extract, transform and load."
+          ParentId="Package"
+          Size="215,381"
+          Id="3e2eb328-826d-456a-b7ea-26baea02036c"
+          TopLeft="24,4">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Trebuchet MS"
+              Size="18"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="The package start execution is logged in the etl.PackageExecutionLog table, together with the ETLDate parameter value and other execution facts. When logged, an ETLD that represents the package execution is returned and stored in a package variable named ETLID."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="343,92"
+          Id="d230a712-64ad-41a5-8d8a-61533372aae1"
+          TopLeft="497,5.50000000000001" />
+        <AnnotationLayout
+          Text="All fact load packages are executed after the success of the loading of the dimensions packages.&#xA;&#xA;Notice the Execute Package task's package reference is to a package located in the same project. This is new in SQL Server 2012 Integration Services, and saves needing to configure an absolute file path reference to the package.&#xA;&#xA;Notice also the Parameter Bindings configuration for the task. Each load package includes an ETLID parameter to receive the parent package's ETLID. This way the execution log can store a reference to the executing package's ETLID. All data modifications and inserts store the ETLID value in the table's ETLID column."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="333,212"
+          Id="bbf80674-8e01-458f-84e6-898b73147172"
+          TopLeft="496.571428571429,271" />
+        <AnnotationLayout
+          Text="The package end execution is logged in the etl.PackageExecutionLog table."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="316,53"
+          Id="55846c00-fbaa-4c5f-83a2-d031d4caad48"
+          TopLeft="494.142857142858,578.213333333334" />
+        <AnnotationLayout
+          Text="All dimensionload packages are executed before the loading of any fact table data."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="324,53"
+          Id="fbca0574-b7ee-427e-ad30-9ac7cfb6bebb"
+          TopLeft="501.142857142858,117" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

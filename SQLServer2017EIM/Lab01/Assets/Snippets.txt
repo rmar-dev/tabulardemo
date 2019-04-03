@@ -1,0 +1,44 @@
+>> QuotaExtractShare parameter: Value
+==================================================
+\\SQLSERVER2017\QuotaExtract
+
+
+>> QuotaExtract ConnectionString expressions
+==================================================
+@[$Package::QuotaExtractShare] + "\\" + (DT_WSTR, 4)@[$Package::FiscalYear] + "_*.csv"
+
+
+>> SQL statement to delete existing quota
+==================================================
+EXEC [dbo].[uspFactResellerSalesQuotaDelete] ?;
+
+
+>> Scipt component Input0_ProcessInputRow code
+==================================================
+switch(Row.FiscalQuarter)
+{
+	case "Q1":
+		Row.DateKey = ((Variables.FiscalYear - 1) * 10000) + 701;
+		break;
+	case "Q2":
+		Row.DateKey = ((Variables.FiscalYear - 1) * 10000) + 1001;
+		break;
+	case "Q3":
+		Row.DateKey = (Variables.FiscalYear * 10000) + 101;
+		break;
+	case "Q4":
+		Row.DateKey = (Variables.FiscalYear * 10000) + 401;
+		break;
+}
+
+
+>> Lookup EmployeeKey SQL query
+==================================================
+SELECT
+	[EmployeeKey]
+	,[EmployeeNationalIDAlternateKey]
+FROM
+	[dbo].[DimEmployee]
+WHERE
+	[SalesPersonFlag] = 1
+	AND [EndDate] IS NULL;

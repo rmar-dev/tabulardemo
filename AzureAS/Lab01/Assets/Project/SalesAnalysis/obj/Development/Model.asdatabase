@@ -1,0 +1,633 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "name": "AdventureWorksDW2016-Lite",
+        "connectionString": "Data Source=aaslab.database.windows.net;Initial Catalog=AdventureWorksDW2016-Lite;User ID=peter;Persist Security Info=true;Encrypt=true;TrustServerCertificate=false",
+        "impersonationMode": "impersonateServiceAccount",
+        "provider": "System.Data.SqlClient",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlAzure"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Date",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "DateKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isKey": true,
+            "sourceColumn": "FullDateAlternateKey",
+            "formatString": "General Date",
+            "sourceProviderType": "date"
+          },
+          {
+            "type": "calculated",
+            "name": "Year",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "\"FY\" & YEAR([Date]) + IF(MONTH([Date]) > 6, 1, 0)"
+          },
+          {
+            "type": "calculated",
+            "name": "Month",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "YEAR([Date]) & \" \" & FORMAT([Date], \"mmm\")",
+            "sortByColumn": "MonthKey"
+          },
+          {
+            "type": "calculated",
+            "name": "MonthKey",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "(YEAR([Date]) * 100) + MONTH([Date])"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Date",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[DimDate].* FROM [dbo].[DimDate] ",
+              "dataSource": "AdventureWorksDW2016-Lite"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Calendar",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year"
+              },
+              {
+                "name": "Month",
+                "ordinal": 1,
+                "column": "Month"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[DimDate].* FROM [dbo].[DimDate] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimDate"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Reseller Sales",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "OrderDateKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "OrderDateKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "ResellerKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ResellerKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "OrderQuantity",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "OrderQuantity",
+            "sourceProviderType": "smallint"
+          },
+          {
+            "name": "UnitPrice",
+            "dataType": "decimal",
+            "isHidden": true,
+            "sourceColumn": "UnitPrice",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "sourceProviderType": "money",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "TotalProductCost",
+            "dataType": "decimal",
+            "isHidden": true,
+            "sourceColumn": "TotalProductCost",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "sourceProviderType": "money",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "SalesAmount",
+            "dataType": "decimal",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "[OrderQuantity] * [UnitPrice]",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Reseller Sales",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[FactResellerSales].* FROM [dbo].[FactResellerSales] ",
+              "dataSource": "AdventureWorksDW2016-Lite"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Units",
+            "expression": "SUM([OrderQuantity])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Avg Price",
+            "expression": "AVERAGE([UnitPrice])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Cost",
+            "expression": "SUM([TotalProductCost])",
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Median Price",
+            "expression": "MEDIAN([UnitPrice])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Min Price",
+            "expression": "MIN([UnitPrice])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Max Price",
+            "expression": "MAX([UnitPrice])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales",
+            "expression": "SUM([SalesAmount])",
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Profit",
+            "expression": "[Sales] - [Cost]",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Profitability",
+            "expression": "DIVIDE([Profit], [Sales])",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[FactResellerSales].* FROM [dbo].[FactResellerSales] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "FactResellerSales"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Product",
+            "dataType": "string",
+            "sourceColumn": "EnglishProductName",
+            "sourceProviderType": "VarChar"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color",
+            "sourceProviderType": "VarChar"
+          },
+          {
+            "name": "Subcategory",
+            "dataType": "string",
+            "sourceColumn": "EnglishProductSubcategoryName",
+            "sourceProviderType": "VarChar"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "EnglishProductCategoryName",
+            "sourceProviderType": "VarChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Product",
+            "dataView": "full",
+            "source": {
+              "query": [
+                "SELECT",
+                "  DimProduct.ProductKey",
+                "  ,DimProduct.EnglishProductName",
+                "  ,DimProduct.Color",
+                "  ,DimProductSubcategory.EnglishProductSubcategoryName",
+                "  ,DimProductCategory.EnglishProductCategoryName",
+                "FROM",
+                "  DimProductSubcategory",
+                "  INNER JOIN DimProduct",
+                "    ON DimProductSubcategory.ProductSubcategoryKey = DimProduct.ProductSubcategoryKey",
+                "  INNER JOIN DimProductCategory",
+                "    ON DimProductSubcategory.ProductCategoryKey = DimProductCategory.ProductCategoryKey"
+              ],
+              "dataSource": "AdventureWorksDW2016-Lite"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT",
+                  "  DimProduct.ProductKey",
+                  "  ,DimProduct.EnglishProductName",
+                  "  ,DimProduct.Color",
+                  "  ,DimProductSubcategory.EnglishProductSubcategoryName",
+                  "  ,DimProductCategory.EnglishProductCategoryName",
+                  "FROM",
+                  "  DimProductSubcategory",
+                  "  INNER JOIN DimProduct",
+                  "    ON DimProductSubcategory.ProductSubcategoryKey = DimProduct.ProductSubcategoryKey",
+                  "  INNER JOIN DimProductCategory",
+                  "    ON DimProductSubcategory.ProductCategoryKey = DimProductCategory.ProductCategoryKey</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState><DesignerState><UseGenericDesigner>false</UseGenericDesigner><InternalDesignerState><QueryDefinition xmlns=\"http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational\"><SelectedColumns><ColumnExpression ColumnOwner=\"DimProduct\" ColumnName=\"ProductKey\" /><ColumnExpression ColumnOwner=\"DimProduct\" ColumnName=\"EnglishProductName\" /><ColumnExpression ColumnOwner=\"DimProduct\" ColumnName=\"Color\" /><ColumnExpression ColumnOwner=\"DimProductSubcategory\" ColumnName=\"EnglishProductSubcategoryName\" /><ColumnExpression ColumnOwner=\"DimProductCategory\" ColumnName=\"EnglishProductCategoryName\" /></SelectedColumns><Joins><Join Type=\"CROSS JOIN\" ColumnOwner=\"DimProductSubcategory\" /><Join Type=\"INNER JOIN\" ColumnOwner=\"DimProduct\"><On><From ColumnOwner=\"DimProductSubcategory\" ColumnName=\"ProductSubcategoryKey\" /><To ColumnOwner=\"DimProduct\" ColumnName=\"ProductSubcategoryKey\" /></On></Join><Join Type=\"INNER JOIN\" ColumnOwner=\"DimProductCategory\"><On><From ColumnOwner=\"DimProductSubcategory\" ColumnName=\"ProductCategoryKey\" /><To ColumnOwner=\"DimProductCategory\" ColumnName=\"ProductCategoryKey\" /></On></Join></Joins></QueryDefinition></InternalDesignerState></DesignerState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Products",
+            "levels": [
+              {
+                "name": "Category",
+                "ordinal": 0,
+                "column": "Category"
+              },
+              {
+                "name": "Subcategory",
+                "ordinal": 1,
+                "column": "Subcategory"
+              },
+              {
+                "name": "Product",
+                "ordinal": 2,
+                "column": "Product"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": [
+              "SELECT",
+              "  DimProduct.ProductKey",
+              "  ,DimProduct.EnglishProductName",
+              "  ,DimProduct.Color",
+              "  ,DimProductSubcategory.EnglishProductSubcategoryName",
+              "  ,DimProductCategory.EnglishProductCategoryName",
+              "FROM",
+              "  DimProductSubcategory",
+              "  INNER JOIN DimProduct",
+              "    ON DimProductSubcategory.ProductSubcategoryKey = DimProduct.ProductSubcategoryKey",
+              "  INNER JOIN DimProductCategory",
+              "    ON DimProductSubcategory.ProductCategoryKey = DimProductCategory.ProductCategoryKey"
+            ]
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Product"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT",
+              "  DimProduct.ProductKey",
+              "  ,DimProduct.EnglishProductName",
+              "  ,DimProduct.Color",
+              "  ,DimProductSubcategory.EnglishProductSubcategoryName",
+              "  ,DimProductCategory.EnglishProductCategoryName",
+              "FROM",
+              "  DimProductSubcategory",
+              "  INNER JOIN DimProduct",
+              "    ON DimProductSubcategory.ProductSubcategoryKey = DimProduct.ProductSubcategoryKey",
+              "  INNER JOIN DimProductCategory",
+              "    ON DimProductSubcategory.ProductCategoryKey = DimProductCategory.ProductCategoryKey</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState><DesignerState><UseGenericDesigner>false</UseGenericDesigner><InternalDesignerState><QueryDefinition xmlns=\"http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational\"><SelectedColumns><ColumnExpression ColumnOwner=\"DimProduct\" ColumnName=\"ProductKey\" /><ColumnExpression ColumnOwner=\"DimProduct\" ColumnName=\"EnglishProductName\" /><ColumnExpression ColumnOwner=\"DimProduct\" ColumnName=\"Color\" /><ColumnExpression ColumnOwner=\"DimProductSubcategory\" ColumnName=\"EnglishProductSubcategoryName\" /><ColumnExpression ColumnOwner=\"DimProductCategory\" ColumnName=\"EnglishProductCategoryName\" /></SelectedColumns><Joins><Join Type=\"CROSS JOIN\" ColumnOwner=\"DimProductSubcategory\" /><Join Type=\"INNER JOIN\" ColumnOwner=\"DimProduct\"><On><From ColumnOwner=\"DimProductSubcategory\" ColumnName=\"ProductSubcategoryKey\" /><To ColumnOwner=\"DimProduct\" ColumnName=\"ProductSubcategoryKey\" /></On></Join><Join Type=\"INNER JOIN\" ColumnOwner=\"DimProductCategory\"><On><From ColumnOwner=\"DimProductSubcategory\" ColumnName=\"ProductCategoryKey\" /><To ColumnOwner=\"DimProductCategory\" ColumnName=\"ProductCategoryKey\" /></On></Join></Joins></QueryDefinition></InternalDesignerState></DesignerState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reseller",
+        "columns": [
+          {
+            "name": "ResellerKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ResellerKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Business Type",
+            "dataType": "string",
+            "sourceColumn": "BusinessType",
+            "sourceProviderType": "VarChar"
+          },
+          {
+            "name": "Reseller",
+            "dataType": "string",
+            "sourceColumn": "ResellerName",
+            "sourceProviderType": "VarChar"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "EnglishCountryRegionName",
+            "sourceProviderType": "VarChar",
+            "dataCategory": "Country"
+          },
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "StateProvinceName",
+            "sourceProviderType": "VarChar",
+            "dataCategory": "StateOrProvince"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City",
+            "sourceProviderType": "VarChar",
+            "dataCategory": "City"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Reseller",
+            "dataView": "full",
+            "source": {
+              "query": [
+                "SELECT",
+                "  DimReseller.ResellerKey",
+                "  ,DimReseller.BusinessType",
+                "  ,DimReseller.ResellerName",
+                "  ,DimGeography.EnglishCountryRegionName",
+                "  ,DimGeography.StateProvinceName",
+                "  ,DimGeography.City",
+                "FROM",
+                "  DimGeography",
+                "  INNER JOIN DimReseller",
+                "    ON DimGeography.GeographyKey = DimReseller.GeographyKey"
+              ],
+              "dataSource": "AdventureWorksDW2016-Lite"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT",
+                  "  DimReseller.ResellerKey",
+                  "  ,DimReseller.BusinessType",
+                  "  ,DimReseller.ResellerName",
+                  "  ,DimGeography.EnglishCountryRegionName",
+                  "  ,DimGeography.StateProvinceName",
+                  "  ,DimGeography.City",
+                  "FROM",
+                  "  DimGeography",
+                  "  INNER JOIN DimReseller",
+                  "    ON DimGeography.GeographyKey = DimReseller.GeographyKey</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState><DesignerState><UseGenericDesigner>false</UseGenericDesigner><InternalDesignerState><QueryDefinition xmlns=\"http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational\"><SelectedColumns><ColumnExpression ColumnOwner=\"DimReseller\" ColumnName=\"ResellerKey\" /><ColumnExpression ColumnOwner=\"DimReseller\" ColumnName=\"BusinessType\" /><ColumnExpression ColumnOwner=\"DimReseller\" ColumnName=\"ResellerName\" /><ColumnExpression ColumnOwner=\"DimGeography\" ColumnName=\"EnglishCountryRegionName\" /><ColumnExpression ColumnOwner=\"DimGeography\" ColumnName=\"StateProvinceName\" /><ColumnExpression ColumnOwner=\"DimGeography\" ColumnName=\"City\" /></SelectedColumns><Joins><Join Type=\"CROSS JOIN\" ColumnOwner=\"DimGeography\" /><Join Type=\"INNER JOIN\" ColumnOwner=\"DimReseller\"><On><From ColumnOwner=\"DimGeography\" ColumnName=\"GeographyKey\" /><To ColumnOwner=\"DimReseller\" ColumnName=\"GeographyKey\" /></On></Join></Joins></QueryDefinition></InternalDesignerState></DesignerState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Resellers",
+            "levels": [
+              {
+                "name": "Business Type",
+                "ordinal": 0,
+                "column": "Business Type"
+              },
+              {
+                "name": "Reseller",
+                "ordinal": 1,
+                "column": "Reseller"
+              }
+            ]
+          },
+          {
+            "name": "Geography",
+            "levels": [
+              {
+                "name": "Country",
+                "ordinal": 0,
+                "column": "Country"
+              },
+              {
+                "name": "State",
+                "ordinal": 1,
+                "column": "State"
+              },
+              {
+                "name": "City",
+                "ordinal": 2,
+                "column": "City"
+              },
+              {
+                "name": "Reseller",
+                "ordinal": 3,
+                "column": "Reseller"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": [
+              "SELECT",
+              "  DimReseller.ResellerKey",
+              "  ,DimReseller.BusinessType",
+              "  ,DimReseller.ResellerName",
+              "  ,DimGeography.EnglishCountryRegionName",
+              "  ,DimGeography.StateProvinceName",
+              "  ,DimGeography.City",
+              "FROM",
+              "  DimGeography",
+              "  INNER JOIN DimReseller",
+              "    ON DimGeography.GeographyKey = DimReseller.GeographyKey"
+            ]
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Reseller"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT",
+              "  DimReseller.ResellerKey",
+              "  ,DimReseller.BusinessType",
+              "  ,DimReseller.ResellerName",
+              "  ,DimGeography.EnglishCountryRegionName",
+              "  ,DimGeography.StateProvinceName",
+              "  ,DimGeography.City",
+              "FROM",
+              "  DimGeography",
+              "  INNER JOIN DimReseller",
+              "    ON DimGeography.GeographyKey = DimReseller.GeographyKey</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState><DesignerState><UseGenericDesigner>false</UseGenericDesigner><InternalDesignerState><QueryDefinition xmlns=\"http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational\"><SelectedColumns><ColumnExpression ColumnOwner=\"DimReseller\" ColumnName=\"ResellerKey\" /><ColumnExpression ColumnOwner=\"DimReseller\" ColumnName=\"BusinessType\" /><ColumnExpression ColumnOwner=\"DimReseller\" ColumnName=\"ResellerName\" /><ColumnExpression ColumnOwner=\"DimGeography\" ColumnName=\"EnglishCountryRegionName\" /><ColumnExpression ColumnOwner=\"DimGeography\" ColumnName=\"StateProvinceName\" /><ColumnExpression ColumnOwner=\"DimGeography\" ColumnName=\"City\" /></SelectedColumns><Joins><Join Type=\"CROSS JOIN\" ColumnOwner=\"DimGeography\" /><Join Type=\"INNER JOIN\" ColumnOwner=\"DimReseller\"><On><From ColumnOwner=\"DimGeography\" ColumnName=\"GeographyKey\" /><To ColumnOwner=\"DimReseller\" ColumnName=\"GeographyKey\" /></On></Join></Joins></QueryDefinition></InternalDesignerState></DesignerState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "18e08ac1-6db7-4bda-bcf0-9c17d419478a",
+        "fromTable": "Reseller Sales",
+        "fromColumn": "OrderDateKey",
+        "toTable": "Date",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "ceefdbe2-05b6-493e-87f9-ad9d018604dc",
+        "fromTable": "Reseller Sales",
+        "fromColumn": "ProductKey",
+        "toTable": "Product",
+        "toColumn": "ProductKey"
+      },
+      {
+        "name": "adcffbfb-61b9-495b-b617-159d9b8e353f",
+        "fromTable": "Reseller Sales",
+        "fromColumn": "ResellerKey",
+        "toTable": "Reseller",
+        "toColumn": "ResellerKey"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

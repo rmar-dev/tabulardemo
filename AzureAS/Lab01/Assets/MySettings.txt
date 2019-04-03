@@ -1,0 +1,4 @@
+Azure SQL Server Name:               
+Azure SQL Server Admin Login:        LabUser
+Azure SQL Server Admin Password:     Pass@word1
+Azure Analysis Services Server Name: 

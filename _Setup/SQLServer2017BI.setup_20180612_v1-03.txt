@@ -1,0 +1,73 @@
+All rights reserved © 2017-2018 Microsoft
+
+The operating system and products have been activiated by using Microsoft product keys
+Important: Do not distribute this virtual machine outside of Microsoft
+
+Sponsor:   Colin Murphy <colinmu@microsoft.com>
+Developer: Peter Myers <peter.myers@bitwisesolutions.com.au>
+
+v1.00 18-AUG-2017 (base VM)
+v1.01 20-SEP-2017 (SQL Server 2017 GA)
+v1.02 13-JAN-2018
+v1.03 12-JUN-2018
+
+
+VIRTUAL MACHINE:
+----------------
+Microsoft hands-on lab virtual machine: Windows Server 2016, SQL Server 2017, Visual Studio 2015, Office 2016.
+
+LAB LOGIN
+---------
+SQLSERVER2017\LabUser
+
+PASSWORD:
+---------
+Pass@word1 (used for all accounts/keys)
+
+OPERATING SYSTEM:
+-----------------
+Windows Server 2016 Standard Edition (standalone server)
+ -Machine name: SQLSERVER2017
+ -Administrator: SQLSERVER2017\Administrator (not to be used for labs)
+ -All Windows updates applied as at 31-AUG-2017
+ -Windowspdates are disabled
+ -Remote connections should be made to 192.168.150.107
+
+SERVICES:
+---------
+SQL Server 2017 Developer Edition
+.Default instance:
+ -Database Engine
+ -Analysis Services (Multidimensional and Data Mining mode)
+ -Analysis Services (Tabular mode: \TABULAR)
+ -Reporting Services (Native mode)
+
+APPLICATIONS:
+-------------
+SQL Server Management Studio (17.7 v14.0.17254.0)
+Visual Studio 2015 Enterprise Update 3 (v14.0.25431.01)
+-SQL Server Data Tools (v15.1.61709.290)
+-SQL Server Integration Services (v14.0.800.90)
+-SQL Server Analysis Services (v14.0.1012.227)
+-SQL Server Reporting Services (v14.0.1012.227)
+Power BI Report Server (March 2018: v1.2.6690.34729)
+Power BI Desktop (Power BI Report Server: March 2018: 64-bit: v2.56.5023.1043)
+SQL Server 2016 Report Builder (v14.0.609.142)
+SQL Server 2016 Mobile Report Publisher (v1.0.4214.59)
+Office Professional Plus 2016 32-bit (v16.0.8730.2165)
+Adobe Acrobat Reader DC (v2018.011.20040)
+
+EXCEL ADD-INS:
+--------------
+SQL Server 2016 Master Data Services Add-in for Excel (v13.1.4447.0)
+
+DATABASES:
+----------
+SQL Server sample databases:
+ -AdventureWorks2016 CTP3 (without modification)
+ -AdventureWorksDW2016 CTP3 (without modification)
+
+OTHER:
+------
+Microsoft Access Database Engine 2010 (v14.0.7015.1000)
+Microsoft Silverlight (v5.1.50907.0)

@@ -1,0 +1,8 @@
+>> AdventureWorksDW2016 data source connection string
+==================================================
+Data Source=SQLSERVER2017;Initial Catalog=AdventureWorksDW2016;
+
+
+>> Mobile Report Publisher: Server Address
+==================================================
+SQLSERVER2017:8080/reports

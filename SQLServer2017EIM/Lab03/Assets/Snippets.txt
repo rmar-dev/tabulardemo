@@ -1,0 +1,23 @@
+>> Rule: Valid phone format: Pattern
+==================================================
+(000) 000-0000
+
+
+>> Rule: Valid email address: Regular expression
+==================================================
+\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b
+
+
+>> Rule: Valid email address: String
+==================================================
+@lab.microsoft.com
+
+
+>> Rule: Valid postal code format: Regular expression [1-US]
+==================================================
+^\d{5}(?:[-\s]\d{4})?$
+
+
+>> Rule: Valid postal code format: Regular expression [2-Canada]
+==================================================
+^(?!.*[DFIOQU])[A-VXY][0-9][A-Z][ ][0-9][A-Z][0-9]$

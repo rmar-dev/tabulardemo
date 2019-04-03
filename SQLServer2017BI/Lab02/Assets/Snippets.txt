@@ -1,0 +1,74 @@
+>> Date query: Year custom column expression
+==================================================
+"CY" & Number.ToText(Date.Year([Date]))
+
+
+>> Date query: Quarter custom column expression
+==================================================
+[Year] & " Q" & Number.ToText(Date.QuarterOfYear([Date]))
+
+
+>> Date query: Month custom column expression
+==================================================
+Number.ToText(Date.Year([Date])) & " " & Date.ToText([Date], "MMM")
+
+
+>> Salesperson query: Salesperson custom column expression
+==================================================
+[FirstName] & " " & [LastName]
+
+
+>> Target query: DateKey custom column expression
+==================================================
+([Year] * 10000) + ((([Quarter] * 3) - 2) * 100) + 1
+
+
+>> Profit measure expression
+==================================================
+Profit:=[Sales] - [Cost]
+
+
+>> Profit measure expression
+==================================================
+Profit%:=DIVIDE([Profit], [Sales])
+
+
+>> Sales YTD measure expression
+==================================================
+Sales YTD:=TOTALYTD([Sales], 'Date'[Date])
+
+
+>> Target measure expression
+==================================================
+Target:=
+IF(
+	ISFILTERED('Date'[Month]),
+	SUMX(
+		VALUES('Date'[Quarter]),
+		CALCULATE(
+			SUM([TargetAmount]),
+			ALLEXCEPT('Date', 'Date'[Quarter])
+		) / 3 * CALCULATE(DISTINCTCOUNT('Date'[Month]))
+	),
+	SUM([TargetAmount])
+)
+
+
+>> Variance measure expression
+==================================================
+Variance:=[Sales] - [Target]
+
+
+>> Variance% measure expression
+==================================================
+Variance%:=DIVIDE([Variance], [Target])
+
+
+>> Sales Performance measure expression
+==================================================
+Sales Performance:=[Sales]
+
+
+>> Salesperson row filter
+==================================================
+=[Region] = LOOKUPVALUE(Salesperson[Region], Salesperson[LoginID], USERNAME())

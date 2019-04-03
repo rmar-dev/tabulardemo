@@ -1,0 +1,43 @@
+>> Date query: Year custom column expression
+==================================================
+"CY" & Number.ToText(Date.Year([Date]))
+
+
+>> Date query: Quarter custom column expression
+==================================================
+[Year] & " Q" & Number.ToText(Date.QuarterOfYear([Date]))
+
+
+>> Date query: Month custom column expression
+==================================================
+Number.ToText(Date.Year([Date])) & " " & Date.ToText([Date], "MMM")
+
+
+>> Date table: Month calculated column expression
+==================================================
+MonthKey = (YEAR([Date]) * 100) + MONTH([Date])
+
+
+>> Country population: URL
+==================================================
+\\SQLSERVER2017\WebServer\List of Countries and Dependencies by Population.html
+
+
+>> Sales table: Sales per Capita measure expression
+==================================================
+Sales per Capita = DIVIDE(SUM(Sales[Sales]), SUM(Country[Population]))
+
+
+>> Report server address
+==================================================
+http://SQLSERVER2017:8080/reports
+
+
+>> Data source user name
+==================================================
+SQLSERVER2017\LabUser
+
+
+>> Data source password
+==================================================
+Pass@word1

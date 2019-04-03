@@ -1,0 +1,8 @@
+>> Power BI Report Server address
+==================================================
+http://SQLSERVER2017:8080/reports
+
+
+>> Median Price measure
+==================================================
+Median Price = MEDIAN(Sales[UnitPrice])

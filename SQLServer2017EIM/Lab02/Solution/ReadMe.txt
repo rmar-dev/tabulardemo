@@ -1,0 +1,1 @@
+If you need to restore the solution module, run the Restore.cmd as Administrator.

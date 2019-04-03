@@ -1,0 +1,6 @@
+D:\SQLServer2016BI\Lab03\Starter\SalesAnalysis\bin\Test\Model.asdatabase
+D:\SQLServer2016BI\Lab03\Starter\SalesAnalysis\bin\Test\Model.deploymenttargets
+D:\SQLServer2016BI\Lab03\Starter\SalesAnalysis\bin\Test\Model.deploymentoptions
+D:\SQLServer2016BI\Lab03\Starter\SalesAnalysis\obj\Test\Model.asdatabase
+D:\SQLServer2016BI\Lab03\Starter\SalesAnalysis\obj\Test\Model.deploymentoptions
+D:\SQLServer2016BI\Lab03\Starter\SalesAnalysis\obj\Test\Model.deploymenttargets

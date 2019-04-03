@@ -1,0 +1,427 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1400,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/localhost;AdventureWorksDW2016",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "localhost",
+            "database": "AdventureWorksDW2016"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "ServiceAccount",
+          "EncryptConnection": false
+        }
+      },
+      {
+        "type": "structured",
+        "name": "File/D:\\SQLServer2017BI\\Lab02\\Assets\\SalesTarget csv",
+        "connectionDetails": {
+          "protocol": "file",
+          "address": {
+            "path": "D:\\SQLServer2017BI\\Lab02\\Assets\\SalesTarget.csv"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "ServiceAccount",
+          "kind": "File",
+          "path": "d:\\sqlserver2017bi\\lab02\\assets\\salestarget.csv"
+        },
+        "contextExpression": [
+          "let",
+          "    #\"0001\" = Csv.Document(..., [Delimiter = \",\", Columns = 6, Encoding = 1252, QuoteStyle = QuoteStyle.None]),",
+          "    #\"0002\" = Table.PromoteHeaders(#\"0001\", [PromoteAllScalars = true]),",
+          "    #\"0003\" = Table.TransformColumnTypes(#\"0002\", {{\"Year\", Int64.Type}, {\"Employee ID\", type text}, {\"Q1\", Int64.Type}, {\"Q2\", Int64.Type}, {\"Q3\", Int64.Type}, {\"Q4\", Int64.Type}})",
+          "in",
+          "    #\"0003\""
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Date",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Date"
+          },
+          {
+            "name": "Year",
+            "dataType": "string",
+            "sourceColumn": "Year"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "string",
+            "sourceColumn": "Quarter"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2016\",",
+                "    dbo_DimDate = Source{[Schema=\"dbo\",Item=\"DimDate\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_DimDate, each [FullDateAlternateKey] > #date(2013, 12, 31)),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Filtered Rows\",{\"DateKey\", \"FullDateAlternateKey\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Other Columns\",{{\"FullDateAlternateKey\", \"Date\"}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Renamed Columns\", \"Year\", each \"CY\" & Number.ToText(Date.Year([Date]))),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Added Custom\", \"Quarter\", each [Year] & \" Q\" & Number.ToText(Date.QuarterOfYear([Date]))),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Added Custom1\", \"Month\", each Number.ToText(Date.Year([Date])) & \" \" & Date.ToText([Date], \"MMM\")),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"Year\", type text}, {\"Quarter\", type text}, {\"Month\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Salesperson",
+        "columns": [
+          {
+            "name": "EmployeeKey",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeKey"
+          },
+          {
+            "name": "Employee ID",
+            "dataType": "string",
+            "sourceColumn": "Employee ID"
+          },
+          {
+            "name": "LoginID",
+            "dataType": "string",
+            "sourceColumn": "LoginID"
+          },
+          {
+            "name": "Region",
+            "dataType": "string",
+            "sourceColumn": "Region"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country"
+          },
+          {
+            "name": "Group",
+            "dataType": "string",
+            "sourceColumn": "Group"
+          },
+          {
+            "name": "Salesperson",
+            "dataType": "string",
+            "sourceColumn": "Salesperson"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2016\",",
+                "    dbo_DimEmployee = Source{[Schema=\"dbo\",Item=\"DimEmployee\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_DimEmployee, each ([SalesPersonFlag] = true)),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Salesperson\", each [FirstName] & \" \" & [LastName]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Added Custom\",{{\"Salesperson\", type text}}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type\",{\"EmployeeKey\", \"EmployeeNationalIDAlternateKey\", \"LoginID\", \"DimSalesTerritory\", \"Salesperson\"}),",
+                "    #\"Expanded DimSalesTerritory\" = Table.ExpandRecordColumn(#\"Removed Other Columns\", \"DimSalesTerritory\", {\"SalesTerritoryRegion\", \"SalesTerritoryCountry\", \"SalesTerritoryGroup\"}, {\"SalesTerritoryRegion\", \"SalesTerritoryCountry\", \"SalesTerritoryGroup\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Expanded DimSalesTerritory\",{{\"EmployeeNationalIDAlternateKey\", \"Employee ID\"}, {\"SalesTerritoryRegion\", \"Region\"}, {\"SalesTerritoryCountry\", \"Country\"}, {\"SalesTerritoryGroup\", \"Group\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey"
+          },
+          {
+            "name": "Product",
+            "dataType": "string",
+            "sourceColumn": "Product"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color"
+          },
+          {
+            "name": "Subcategory",
+            "dataType": "string",
+            "sourceColumn": "Subcategory"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2016\",",
+                "    dbo_DimProduct = Source{[Schema=\"dbo\",Item=\"DimProduct\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_DimProduct, each ([FinishedGoodsFlag] = true)),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Filtered Rows\",{\"ProductKey\", \"EnglishProductName\", \"Color\", \"DimProductSubcategory\"}),",
+                "    #\"Expanded DimProductSubcategory\" = Table.ExpandRecordColumn(#\"Removed Other Columns\", \"DimProductSubcategory\", {\"EnglishProductSubcategoryName\", \"DimProductCategory\"}, {\"EnglishProductSubcategoryName\", \"DimProductCategory\"}),",
+                "    #\"Expanded DimProductCategory\" = Table.ExpandRecordColumn(#\"Expanded DimProductSubcategory\", \"DimProductCategory\", {\"EnglishProductCategoryName\"}, {\"EnglishProductCategoryName\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Expanded DimProductCategory\",{{\"EnglishProductName\", \"Product\"}, {\"EnglishProductSubcategoryName\", \"Subcategory\"}, {\"EnglishProductCategoryName\", \"Category\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Reseller",
+        "columns": [
+          {
+            "name": "ResellerKey",
+            "dataType": "int64",
+            "sourceColumn": "ResellerKey"
+          },
+          {
+            "name": "Business Type",
+            "dataType": "string",
+            "sourceColumn": "Business Type"
+          },
+          {
+            "name": "Reseller",
+            "dataType": "string",
+            "sourceColumn": "Reseller"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City"
+          },
+          {
+            "name": "State-Province",
+            "dataType": "string",
+            "sourceColumn": "State-Province"
+          },
+          {
+            "name": "Country-Region",
+            "dataType": "string",
+            "sourceColumn": "Country-Region"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2016\",",
+                "    dbo_DimReseller = Source{[Schema=\"dbo\",Item=\"DimReseller\"]}[Data],",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_DimReseller,{\"ResellerKey\", \"BusinessType\", \"ResellerName\", \"DimGeography\"}),",
+                "    #\"Expanded DimGeography\" = Table.ExpandRecordColumn(#\"Removed Other Columns\", \"DimGeography\", {\"City\", \"StateProvinceName\", \"EnglishCountryRegionName\"}, {\"City\", \"StateProvinceName\", \"EnglishCountryRegionName\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Expanded DimGeography\",{{\"BusinessType\", \"Business Type\"}, {\"ResellerName\", \"Reseller\"}, {\"StateProvinceName\", \"State-Province\"}, {\"EnglishCountryRegionName\", \"Country-Region\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sales",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey"
+          },
+          {
+            "name": "OrderDateKey",
+            "dataType": "int64",
+            "sourceColumn": "OrderDateKey"
+          },
+          {
+            "name": "ResellerKey",
+            "dataType": "int64",
+            "sourceColumn": "ResellerKey"
+          },
+          {
+            "name": "EmployeeKey",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeKey"
+          },
+          {
+            "name": "OrderQuantity",
+            "dataType": "int64",
+            "sourceColumn": "OrderQuantity"
+          },
+          {
+            "name": "TotalProductCost",
+            "dataType": "decimal",
+            "sourceColumn": "TotalProductCost"
+          },
+          {
+            "name": "SalesAmount",
+            "dataType": "decimal",
+            "sourceColumn": "SalesAmount"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;AdventureWorksDW2016\",",
+                "    dbo_FactResellerSales = Source{[Schema=\"dbo\",Item=\"FactResellerSales\"]}[Data],",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_FactResellerSales,{\"ProductKey\", \"OrderDateKey\", \"ResellerKey\", \"EmployeeKey\", \"OrderQuantity\", \"TotalProductCost\", \"SalesAmount\"})",
+                "in",
+                "    #\"Removed Other Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Target",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "Employee ID",
+            "dataType": "string",
+            "sourceColumn": "Employee ID"
+          },
+          {
+            "name": "TargetAmount",
+            "dataType": "decimal",
+            "sourceColumn": "TargetAmount"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source=#\"File/D:\\SQLServer2017BI\\Lab02\\Assets\\SalesTarget csv\",",
+                "    #\"Unpivoted Columns\" = Table.UnpivotOtherColumns(Source, {\"Year\", \"Employee ID\"}, \"Attribute\", \"Value\"),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Unpivoted Columns\",{{\"Attribute\", \"Quarter\"}, {\"Value\", \"TargetAmount\"}}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Renamed Columns\",{{\"TargetAmount\", Currency.Type}}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Changed Type1\",\"Q\",\"\",Replacer.ReplaceText,{\"Quarter\"}),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Replaced Value\",{{\"Quarter\", Int64.Type}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type\", \"DateKey\", each ([Year] * 10000) + ((([Quarter] * 3) - 2) * 100) + 1),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Added Custom\",{{\"DateKey\", Int64.Type}}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type2\",{\"Employee ID\", \"TargetAmount\", \"DateKey\"}),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Removed Other Columns\",{\"DateKey\", \"Employee ID\", \"TargetAmount\"})",
+                "in",
+                "    #\"Reordered Columns\""
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "bb2632ad-2cc3-4c92-9e02-98a638fdc4df",
+        "fromTable": "Sales",
+        "fromColumn": "OrderDateKey",
+        "toTable": "Date",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "45fd2534-bbe9-4dc4-bdff-62c54cc89138",
+        "fromTable": "Sales",
+        "fromColumn": "EmployeeKey",
+        "toTable": "Salesperson",
+        "toColumn": "EmployeeKey"
+      },
+      {
+        "name": "400d03d9-033a-47f5-a604-d22f988e81a0",
+        "fromTable": "Sales",
+        "fromColumn": "ProductKey",
+        "toTable": "Product",
+        "toColumn": "ProductKey"
+      },
+      {
+        "name": "46475ea5-b09c-401d-8edf-e075dc48b4e6",
+        "fromTable": "Sales",
+        "fromColumn": "ResellerKey",
+        "toTable": "Reseller",
+        "toColumn": "ResellerKey"
+      },
+      {
+        "name": "7a2572dc-1ab6-4310-b954-46c9e503e61c",
+        "fromTable": "Target",
+        "fromColumn": "DateKey",
+        "toTable": "Date",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "c16bc947-6e7d-4358-9512-6b14d14720c2",
+        "fromTable": "Target",
+        "fromColumn": "Employee ID",
+        "toTable": "Salesperson",
+        "toColumn": "Employee ID"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "500"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

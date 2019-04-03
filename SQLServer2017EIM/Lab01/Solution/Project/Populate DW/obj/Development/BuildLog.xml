@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>Populate DW</Name>
+    <LastWriteTime>2017-06-28T14:22:56.7700029Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+    <Salt>07uTG+sB</Salt>
+    <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2McSZgA1pEWWz+xI/7Rm2QAAAAACAAAAAAAQZgAAAAEAACAAAADg7wSnsFkzG84u5YrrF3YpIUkCvIH+YRyxfyH/457NPwAAAAAOgAAAAAIAACAAAADHofrPNsx0OpneqPUhZkN1Wcz5qnbniAb8OB3OvDcW1TAAAAAgaOjjJQKzmngZhXOWPmu2qzMiGpiJj2d/HGa4uzzx8iYS5NKBfuaFpBHYmb23zLBAAAAAv8Bt98vJRI6fmdAPXLzLIA/lD/qWf7Ha6ZKQ3GSROl39P7rzXB5PrVwwJ9RcWcbmA8cNTTsgHwFbe92fZ410Iw==</LastKnownProtectedHashedPassword>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>FactResellerSalesQuota.dtsx</Name>
+      <LastWriteTime>2017-06-28T14:13:14.2677206Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+      <Salt>OMMBQbPp</Salt>
+      <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2McSZgA1pEWWz+xI/7Rm2QAAAAACAAAAAAAQZgAAAAEAACAAAABPEyqvMx0ZMeuz/BXkZL0BQDpqqSsBXBEfwcPqBpnl/wAAAAAOgAAAAAIAACAAAABE9A1i0ShN/NZ5sA9c7BrSGzdEaU37ZvIONq4O+ZmWSjAAAAC+g9C6vRkEEZXCjdbP/COhlhPypmr3N5eO3ZdTlahKdRQ5HCnuJ2FNBWyMdck7dYlAAAAAKY2/DqrOh0HqFm2DdieNKY8Df2iOqeQn5mZ1atZ7d4oOJ7QL+ZDwt/4zlsEKtps5Z5hnx78Xy3K+J29H2oD92g==</LastKnownProtectedHashedPassword>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>

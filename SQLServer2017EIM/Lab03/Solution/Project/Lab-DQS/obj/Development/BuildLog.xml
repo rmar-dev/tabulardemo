@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>Lab-DQS</Name>
+    <LastWriteTime>2018-01-06T03:35:40.2676973Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptAllWithPassword</LastKnownProtectionLevel>
+    <Salt>7uyPQWkH</Salt>
+    <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwlP923RT+0eQlNQzXIvZHAAAAAACAAAAAAAQZgAAAAEAACAAAABjglZyc6YfnjWTznRix3oYFN8+N0FPQfi2YsIU3ghaXQAAAAAOgAAAAAIAACAAAACMCmIko4QS5OBAuV7/75n1F0Wc2ERL5hW1iZxR9sgP1jAAAACjrTtRE6Iffv51PvcDdyWpcCHZrLSA5UpfyldVXa7xxw5cLNojmsL3XL2w/QDLlEpAAAAAs36zcTmzTTxB48PxVez8wklgpVtqTs4drJboIjlZt22XcCpDs7/QKnnLuiCG7Jw6TfhB9G1Q55O/XKPgMWonNg==</LastKnownProtectedHashedPassword>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>Load DimOffice.dtsx</Name>
+      <LastWriteTime>2018-01-06T03:35:40.2226967Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptAllWithPassword</LastKnownProtectionLevel>
+      <Salt>YIvhYUNd</Salt>
+      <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwlP923RT+0eQlNQzXIvZHAAAAAACAAAAAAAQZgAAAAEAACAAAAA2R3A3yBr5Q0nu2P1K8w1YG4z/m52oR8XiZCs1SvHA8gAAAAAOgAAAAAIAACAAAAAtMlHQUTIA7cQ6QJVEFF7pna076Nwebm9yz0evyJifojAAAAA9FL8Me3gKZsqNggzOkYgX+Q84m8ryvI4g8q/Q8351hXj0eW6peldeNrfCQhZJ6eRAAAAAikTk3ce/7Ge1oMeCOE5xI9uaZgZUyEVi9BQgh+ujvMkbT8DRPeskarQfXpO0FD8k7imyQVZsgOQPwGGdCsKUJA==</LastKnownProtectedHashedPassword>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>
